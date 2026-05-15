@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: kargo-takip-api
+    runtime: python
+    rootDir: server
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: BASE_PUBLIC_URL
+        value: https://kargo-takip-api.onrender.com
+      - key: DEVICE_API_TOKEN
+        sync: false
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      - key: META_APP_SECRET
+        sync: false
+      - key: ALLOW_DEV_SIMULATOR
+        value: "false"
+      - key: DB_PATH
+        value: /var/data/kargo.db
+    disk:
+      name: kargo-data
+      mountPath: /var/data
+      sizeGB: 1
