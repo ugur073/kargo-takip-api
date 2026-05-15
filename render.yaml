@@ -19,8 +19,4 @@ services:
       - key: ALLOW_DEV_SIMULATOR
         value: "false"
       - key: DB_PATH
-        value: /var/data/kargo.db
-    disk:
-      name: kargo-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: ./data/kargo.db
